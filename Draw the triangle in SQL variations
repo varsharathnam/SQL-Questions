@@ -17,3 +17,4 @@ declare @a Integer --declare variable
     end                             --end
 
 */https://www.geeksforgeeks.org/print-different-star-patterns-sql//*
+*/check the above page for other type of patterns*/
