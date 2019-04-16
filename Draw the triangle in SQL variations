@@ -1,0 +1,19 @@
+*/https://www.hackerrank.com/challenges/draw-the-triangle-1/problem*/
+declare @a integer --declare variable
+    select @a = 20 --inititalize variable
+    while @a >= 1  --condition
+    begin          --begin      
+        print replicate ('* ',@a) --print
+        set @a = @a - 1           --decrement
+    end                           --end
+    
+*/https://www.hackerrank.com/challenges/draw-the-triangle-2/problem/*
+declare @a Integer --declare variable
+    select @a = 1  -- initialize variable
+    while @a <=20  --condition  
+        begin      --begin
+        print replicate ('* ', @a)  --print
+        set @a = @a + 1             --increment
+    end                             --end
+
+*/https://www.geeksforgeeks.org/print-different-star-patterns-sql//*
