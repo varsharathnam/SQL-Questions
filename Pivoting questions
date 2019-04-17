@@ -1,0 +1,10 @@
+/*https://www.hackerrank.com/challenges/occupations/problem*/
+
+select min(T1.doctor), min(T1.professor), min(T1.singer), min(T1.actor) from
+(select rank() over (partition by occupation order by name) as ranknum,
+case when occupation = 'Doctor' then name end as Doctor,
+case when occupation = 'Professor' then name end as Professor,
+case when occupation = 'Singer' then name end as Singer,
+case when occupation = 'Actor' then name end as Actor
+from occupations) as T1
+group by T1.ranknum
