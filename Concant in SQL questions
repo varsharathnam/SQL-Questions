@@ -1,0 +1,8 @@
+*/https://www.hackerrank.com/challenges/the-pads/problem/*
+*/solution1/*
+select concat(Name, '(', left(occupation,1), ')') from occupations 
+order by Name
+select concat('There are a total of ', count(occupation), ' ', lower(occupation), 's.') from occupations
+group by occupation
+order by count(occupation), occupation
+
