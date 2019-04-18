@@ -12,4 +12,16 @@ join employee t2
     on t1.company_code = t2.company_code                                   
 group by t1.company_code, t1.founder
 order by t1.company_code
+*********************************************************************************
 
+/*https://www.hackerrank.com/challenges/full-score/problem*/
+
+select t1.hacker_id, t1.name
+from hackers t1, difficulty t2, submissions t3, challenges t4
+where t1.hacker_id = t3.hacker_id
+and t2.score = t3.score
+and t2.difficulty_level = t4.difficulty_level
+and t3.challenge_id = t4.challenge_id
+group by t1.hacker_id, t1.name
+having count(t1.hacker_id) > 1
+order by count(t1.hacker_id) desc, t1.hacker_id
