@@ -1,0 +1,15 @@
+/*https://www.hackerrank.com/challenges/the-company/problem*/
+
+select 
+    t1.company_code, 
+    t1.founder, 
+    count(distinct(t2.lead_manager_code)), 
+    count(distinct(t2.Senior_manager_code)), 
+    count(distinct(t2.manager_code)),
+    count(distinct(t2.employee_code))
+from company t1
+join employee t2
+    on t1.company_code = t2.company_code                                   
+group by t1.company_code, t1.founder
+order by t1.company_code
+
