@@ -8,3 +8,26 @@ case when occupation = 'Singer' then name end as Singer,
 case when occupation = 'Actor' then name end as Actor
 from occupations) as T1
 group by T1.ranknum
+
+
+/*this question repeated in subqueries*/
+/*https://www.hackerrank.com/challenges/harry-potter-and-wands/problem*/
+
+Select 
+    id, 
+    age, 
+    coins_needed, 
+    power 
+    from 
+    (select 
+        t1.id as id, 
+        t2.age as age, 
+        t1.coins_needed as coins_needed, 
+        t1.power as power, 
+        rank () over (partition by t1.power, t2.age order by t1.coins_needed ) as rank
+    from wands t1
+    join wands_property t2
+    on t1.code = t2.code
+    where  t2.is_evil = 0) as x1
+where rank = 1
+order by power desc, age desc
