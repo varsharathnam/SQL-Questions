@@ -31,3 +31,26 @@ Select
     where  t2.is_evil = 0) as x1
 where rank = 1
 order by power desc, age desc
+
+
+/*https://www.hackerrank.com/challenges/challenges/problem*/
+with T1 as (select distinct
+    t1.hacker_id as hacker_id, 
+    t1.name as name, 
+    count(t2.challenge_id) over (partition by t1.hacker_id) as c_cnt
+from hackers as t1
+join challenges as t2
+on t1.hacker_id = t2.hacker_id),
+
+T2 as (select
+    hacker_id, 
+    name, 
+    c_cnt, 
+    count(*) over (partition by c_cnt) as r_cnt 
+    from T1),
+
+T3 as (select max(c_cnt) as max_val from T2)
+
+select T2.hacker_id, T2.name, T2.c_cnt from T2
+where (c_cnt = (select max_val from T3)) or ((c_cnt < (select max_val from T3)) and (r_cnt = 1))
+order by T2.c_cnt desc
