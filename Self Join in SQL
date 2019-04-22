@@ -1,0 +1,15 @@
+/*how to calculate the running sum of a numeric column*/
+/*the table has row number and revenue in it. We need a running total of revenue.*/
+
+select 
+  T1.rownumber, 
+  T1.Revenue, 
+  sum(T2.Revenue) as running total
+  from Table as T1
+  join Table as T2
+  on T1.rownumber >= T2.rownumber
+group by T1.rownumber, T1.Revenue
+Order by T1.rownumber
+
+
+
