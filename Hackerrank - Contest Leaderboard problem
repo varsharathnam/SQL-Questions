@@ -1,0 +1,20 @@
+with X1 as (select 
+    T1.hacker_id as hacker_id,
+    T1.name as name,
+    T2.challenge_id as challenge_id,
+    max(T2.score) as ScoreSum
+from 
+    Hackers as T1
+join 
+    Submissions as T2 
+on T1.hacker_id = T2.hacker_id
+group by T1.hacker_id, T1.name, T2.challenge_id)
+
+select 
+    hacker_id,
+    name,
+    sum(ScoreSum) as Score
+from X1
+group by hacker_id, name
+having sum(ScoreSum) > 0
+order by Score desc, hacker_id
