@@ -1,4 +1,24 @@
 /*https://www.youtube.com/watch?v=PfMznx4sS8U&list=PLgR-BOYibnN0QqIPFbMlS01bw8x9g07Ll&index=3*/
+
+/* The table consists of 
+Sales_ID --- int
+Sales_Cust_ID --- int
+Sales_Emp_ID --- int
+Sales_Date --- date
+Sales_Total --- int
+Payment_method --- cash/card 
+
+One Sales_Cust_Id has one Sales_Emp_ID, one payment method and multiple Sales_ID
+*/
+
+
 /*Scenario: We want to return a ranking of customers by how much they have spent*/
 
-
+select
+  Sales_Cust_ID,
+  sum(Sales_total) as totalSales,
+  rank() over(order by sum(Sales_total) desc) as rnk,
+  dense_rank() over(order by sum(Sales_total) desc) as dns_rnk
+from Sales
+group by Sales_Cust_ID  
+order by rnk desc
