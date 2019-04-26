@@ -1,0 +1,34 @@
+/*https://www.youtube.com/watch?v=xL7BtCT7ix4&list=PLgR-BOYibnN0QqIPFbMlS01bw8x9g07Ll&index=2*/
+/* The table consists of 
+Sales_ID --- int
+Sales_Cust_ID --- int
+Sales_Emp_ID --- int
+Sales_Date --- date
+Sales_Total --- int
+Payment_method --- cash/card 
+
+One Sales_Cust_Id has one Sales_Emp_ID, one payment method and multiple Sales_ID
+*/
+
+/*Select Sales_id and the sales_total. Return values that ranks the Sales_total from highest to lowest*/
+
+select
+  Sales_ID,
+  Sales_total,
+  row_number() over (order by sales_total desc) as rownum,
+  rank() over (order by sales_total desc) as rank,
+  dense_rank() over (order by sales_total desc) as dense,
+  ntile(3) over (order by sales_total desc) as ntle ---ntile always needs an input. here it is 3. It divided the data into 3 segments
+from Sales
+
+o/p
+Sales_ID    Sales_total   Rownum    Rank    dense   ntle
+1           84            1         1       1       1
+2           84            2         1       1       1
+3           56            3         2       3       2
+4           53            4         3       4       2
+5           36            5         4       5       2
+6           12            6         5       6       3
+
+
+
